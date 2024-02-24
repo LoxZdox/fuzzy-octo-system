@@ -1,5 +1,6 @@
 import telebot
 import webbrowser
+import sqlite3
 from telebot import types
 
 
@@ -64,7 +65,10 @@ def site(message):
 def main(message):
     if message:
         bot.reply_to(message, f'Привет, {message.chat.first_name} {message.chat.last_name}!')
-        print('Meow!')
+        bot.register_next_step_handler(message, complex_message(message))
+
+def complex_message(message):
+    bot.send_message(message.chat.id, "Я бы хотел тебе помочь, но не могу, у меня лапки")
     
 
 bot.polling(non_stop=True)
